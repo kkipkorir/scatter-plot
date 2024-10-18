@@ -38,16 +38,14 @@ const ScatterPlot = ()=>{
         .range([padding,width-padding]);
 
 
-        //the yscale
-        const parseTime = d3.timeParse("%M:%S");
+        
         const y = d3.scaleTime()
         .domain([d3.max(data, (d) => new Date(d.Seconds*1000)),
         d3.min(data,(d) => new Date(d.Seconds*1000))])
         .range([height-padding, padding]);  // Reverse the range, so that the smallest times are at the top   
         
         const xAxis = d3.axisBottom(x).tickFormat(d3.format("d"))
-        const yAxis = d3.axisLeft(y).tickFormat(d3.timeFormat("%M:%S")) .ticks(d3.timeSecond.every(15));
-
+        const yAxis = d3.axisLeft(y).tickFormat(d3.timeFormat("%M:%S")).ticks(d3.timeSecond.every(15));
         const svg =  d3.select('#scatter-plot')
         .append('svg')
         .attr('width',width)
@@ -169,7 +167,8 @@ const ScatterPlot = ()=>{
     .attr('r',5)
     .attr('fill','blue');
   
-    }},[data]);
+    }else
+    {console.log(message)}},[data,message]);
     
 
     return (
